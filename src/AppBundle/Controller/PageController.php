@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
+use AppBundle\Model\Page;
+
 
 /**
  * Class PageController
@@ -33,6 +35,8 @@ class PageController extends Controller
      */
     public function singlePostAction($id)
     {
-        
+        $data = new Page();
+        $post = $data->showById($id);
+        return array('post' => $post);
     }
 }

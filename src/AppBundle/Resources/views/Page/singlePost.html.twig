@@ -11,9 +11,9 @@
 
         <!--  Single post  -->
 
-        <div class="post-thumbnail-bg" style="background-image: url(/img/img.jpg)">
+        <div class="post-thumbnail-bg" style="background-image: url({{ post.Thumb }})">
             <div class="shadow"></div>
-            <h2>This record player is entirely powered by wind!</h2>
+            <h2>{{ post.title }}</h2>
         </div>
         <div class="container">
             <div class="row relative">
@@ -22,48 +22,7 @@
 
                     <div class="post-single">
                         <div class="text">
-                            <p><strong>Worried about the state of the world? Worried about what&#8217;s going to happen when the electricity runs out? Vinyl lovers can relax knowing that they&#8217;ll still be able to listen to vinyl.</strong><br />
-                                &nbsp;</p>
-                            <p style="text-align: center;"><img src="/img/img.jpg"/><br />
-                            <p>&nbsp;</p>
-                            <p>There are many reasons to listen to vinyl over digital music. One the main reasons for me is that it&#8217;s somewhat satisfying to be able to see and understand how you can hear the music. If you don&#8217;t understand how vinyl&#8217;s work, <a href="http://www.popsci.com/build-record-player-powered-by-wind">Popular Science</a> have stripped down record players further and have made a record player which is entirely wind powered.</p>
-                            <p>They propose that it will take 2 hours to make and will cost you around $35. Sounds like a good saturday afternoon plan to me..</p>
-                            <p><strong>You will need these tools:</strong></p>
-                            <ul>
-                                <li>Dremel</li>
-                                <li>Box cutter</li>
-                                <li>Wire stripper</li>
-                            </ul>
-                            <p><strong>You will need these  materials:</strong></p>
-                            <ul>
-                                <li>11-by-11-inch plywood board</li>
-                                <li>1?4-by-21?2-inch machine screw</li>
-                                <li>AJC washer</li>
-                                <li>1?4-inch hex nut</li>
-                                <li>Two Slurpee straws</li>
-                                <li>Adhesive putty</li>
-                                <li>1-inch-thick foam insulation sheet</li>
-                                <li>7-inch record</li>
-                                <li>45 rpm adapter (ours came attached to the record)</li>
-                                <li>9 square inches of cellophane</li>
-                                <li>Box of T-pins</li>
-                                <li>Six 8-ounce Styrofoam cups</li>
-                                <li>Old headphone cable</li>
-                                <li>Phonograph needle and cartridge</li>
-                                <li>Conductive wire glue</li>
-                                <li>Pushpin</li>
-                                <li>Loud battery-powered speaker</li>
-                            </ul>
-                            <p><strong>Here&#8217;s how to make it:</strong><br />
-                                1. Drill the exact center of the plywood board with the Dremel until you can thread the screw through. Tighten it on with the washer and the hex nut, and cover it with a 3-inch piece of the straw. Stabilize the board by placing adhesive putty under its corners.</p>
-                            <p>2. Cut two 7-inch circles (traced from the record) and a 1.5-inch circle (traced from the 45 rpm adapter) from the insulation foam. Drill out the circles’ exact centers so they will fit tightly over the straw and spin with little friction. Sand down rough edges. Cut three 1.5-inch circles from cellophane.</p>
-                            <p>3. Line up the hex nut with the hole in the 1.5-inch foam circle, and drill out its shape. Slide the foam onto the hex nut, followed by the three pieces of cellophane, the 7-inch foam circles, the record, and the adapter. Connect the bottom 7-inch circle to the top one with three T-pins.</p>
-                            <p>4. Cut the six cups to 1.5 inch tall. Use two T-pins apiece to fix them every 3.75 inches along the edge of the 7-inch circles.</p>
-                            <p>5. Strip 1/2 inch of the headphone cable and 1 mm of each coated inner wire. Split the copper contact wire in two and use electrical tape to attach it to the electrical grounds of the phonograph cartridge (the lower two contact posts on the back when the needle faces down). Apply a drop of conductive glue and cover with tape.</p>
-                            <p>6. Strip 1 mm of the headphone cable’s inner wires and use electrical tape to connect them to the cartridge&#8217;s top two posts. Apply wire glue and reseal the tape.</p>
-                            <p>7. Wrap a long piece of electrical tape from the end of the cartridge around the bundle of wires up to the headphone cable. Slide the bundle through a 7-inch length of Slurpee straw and tape the straw’s scoop end over the cartridge. Push a T-pin through the straw’s opposite end. This is the tone arm.</p>
-                            <p>8. Fix a pushpin into one corner of the plywood and cover with a 3-inch length of straw. Top the straw with tape and push the tone arm’s T-pin through it so the arm can move freely. Set the needle on the record and plug in to a speaker.<br />
-                                &nbsp;</p>
+                           {{ post.content }}
                         </div>
                     </div>
                 </div>
