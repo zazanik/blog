@@ -11,25 +11,50 @@ use AppBundle\Model\Post;
  */
 class Page
 {
-    
+
+    /**
+     * @return array
+     */
     public function showAll()
     {
-        
+        $file = file_get_contents('../src/AppBundle/Resources/file.json');
+        $posts = json_decode($file);
+        $data_array = [];
+        foreach ($posts as $post){
+            $obj = new Post();
+            $obj->setId($post->id);
+            $obj->setThumb($post->thumb);
+            $obj->setTitle($post->title);
+            $obj->setContent($post->content);
+            $obj->setAuthor($post->author);
+            $obj->setDateCreated($post->date_created);
+            $obj->setDateUpdate($post->date_update);
+            $data_array[] = $obj;
+        }
+        return $data_array;
     }
 
+    /**
+     * @param $id
+     * @return \AppBundle\Model\Post
+     */
     public function showById($id)
     {
         $file = file_get_contents('../src/AppBundle/Resources/file.json');
-        $array = json_decode($file, true);
-        $array = $array["{$id}"];
-        $obj = new Post();
-        $obj->setId($array["id"]);
-        $obj->setThumb($array["thumb"]);
-        $obj->setTitle($array["title"]);
-        $obj->setContent($array["content"]);
-        $obj->setAuthor($array["author"]);
-        $obj->setDateCreated($array["date_created"]);
-        $obj->setDateUpdate($array["date_update"]);
+        $posts = json_decode($file);
+
+        foreach ($posts as $post){
+            if ($post->id == $id){
+                $obj = new Post();
+                $obj->setId($post->id);
+                $obj->setThumb($post->thumb);
+                $obj->setTitle($post->title);
+                $obj->setContent($post->content);
+                $obj->setAuthor($post->author);
+                $obj->setDateCreated($post->date_created);
+                $obj->setDateUpdate($post->date_update);
+            }
+        }
         return $obj;
     }
 }

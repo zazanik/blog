@@ -25,7 +25,9 @@ class PageController extends Controller
      */
     public function blogAction()
     {
-
+        $data = new Page();
+        $posts = $data->showAll();
+        return array('posts' => $posts);
     }
 
     /**
