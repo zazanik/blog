@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Author;
 use AppBundle\Entity\Post;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -53,8 +54,8 @@ class PostController extends Controller
         }
 
         return array(
-            'post' => $post,
-            'form' => $form->createView(),
+            'post'      => $post,
+            'form'      => $form->createView(),
         );
     }
 
