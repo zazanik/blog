@@ -1,11 +1,5 @@
 {% extends "AppBundle::base.html.twig" %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
-{% endblock stylesheets %}
-
 {% block header %}
     <header>
         <div class="container">
@@ -20,8 +14,12 @@
                         <a href="#">Home</a>
                     </li>
                     <li>
-                        <a href="#">Blog</a>
+                        <a href="{{ path('posts_list') }}">Blog</a>
                     </li>
+                    <li>
+                        <a href="{{ path('author_list') }}">Authors</a>
+                    </li>
+
                 </ul>
             </nav>
         </div>

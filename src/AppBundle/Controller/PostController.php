@@ -9,10 +9,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class PostController
+ * @package AppBundle\Controller
+ */
 class PostController extends Controller
 {
     /**
      * @return array
+     *
      * @Route("/", name="posts_list")
      * @Template()
      */
@@ -24,20 +29,10 @@ class PostController extends Controller
     }
 
     /**
-     * @param int $id
-     * @return array
-     * @Route("/posts/{id}", name="single_post")
-     * @Template()
-     */
-    public function viewAction($id)
-    {
-        $em = $this->getDoctrine()->getRepository("AppBundle:Post");
-        $post = $em->find($id);
-        return array("post" => $post);
-    }
-
-    /**
      * Creates a new post entity.
+     *
+    //     * @param Request $request
+    //     * @return array
      *
      * @Route("/posts/create", name="post_create")
      * @Method({"GET", "POST"})
@@ -46,7 +41,7 @@ class PostController extends Controller
     public function createAction(Request $request)
     {
         $post = new Post();
-        $form = $this->createForm('AppBundle\Form\CreatePostType', $post);
+        $form = $this->createForm('AppBundle\Form\PostType', $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -64,22 +59,28 @@ class PostController extends Controller
     }
 
     /**
+     * @param int $id
+     * @return array
+     *
+     * @Route("/posts/{id}", name="single_post")
+     * @Template()
+     */
+    public function viewAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $post = $em->getRepository("AppBundle:Post")->find($id);
+        return array('post' => $post);
+    }
+
+    /**
      * 
      * @Route("/posts/edit/{id}", name="edit_post")
      * @Template()
      */
     public function editAction(Request $request, Post $post)
     {
-//        $em = $this->getDoctrine()->getRepository("AppBundle:Post");
-//        $post = $em->find($id);
-//        return array("post" => $post);
-
-
-
-//        $deleteForm = $this->createDeleteForm($post);
         $editForm = $this->createForm('AppBundle\Form\PostType', $post);
         $editForm->handleRequest($request);
-        dump($editForm);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
@@ -95,21 +96,5 @@ class PostController extends Controller
 
 
     }
-
-//    /**
-//     * Creates a form to delete a post entity.
-//     *
-//     * @param Post $post The post entity
-//     *
-//     * @return \Symfony\Component\Form\Form The form
-//     */
-//    private function createDeleteForm(Post $post)
-//    {
-//        return $this->createFormBuilder()
-//            ->setAction($this->generateUrl('', array('id' => $post->getId())))
-//            ->setMethod('DELETE')
-//            ->getForm()
-//            ;
-//    }
 
 }

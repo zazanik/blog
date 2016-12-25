@@ -1,16 +1,79 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
-{% block body %}
-    <h1>Post creation</h1>
+{% block main %}
+    <main class="blog create-post">
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+        <div class="container">
 
-    <ul>
-        <li>
-            <a href="#">Back to the list</a>
-        </li>
-    </ul>
-{% endblock %}
+            <div class="row margin-top">
+
+                <h2 class="title">Create New Post</h2>
+
+                <div class="col-xs-12 col-md-6 col-md-offset-3">
+
+                    {{ form_start(form) }}
+                    {{ form_errors(form) }}
+
+                    <div class="form-group">
+                        {{ form_errors(form.title) }}
+                        {{ form_widget(form.title) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_errors(form.description) }}
+                        {{ form_widget(form.description) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_errors(form.content) }}
+                        {{ form_widget(form.content) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_errors(form.thumb) }}
+                        {{ form_widget(form.thumb) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_errors(form.thumb) }}
+                        {{ form_widget(form.thumb) }}
+                    </div>
+
+                    {#<div class="form-group">#}
+                        {#{{ form_label(form.createdAt) }}#}
+                        {#{{ form_errors(form.createdAt) }}#}
+                        {#{{ form_widget(form.createdAt) }}#}
+                    {#</div>#}
+
+                    {#<div class="form-group">#}
+                        {#{{ form_label(form.updatedAt) }}#}
+                        {#{{ form_errors(form.updatedAt) }}#}
+                        {#{{ form_widget(form.updatedAt) }}#}
+                    {#</div>#}
+
+                    <button type="submit" class="btn btn-default">Submit</button>
+                    {{ form_end(form) }}
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    {#<ul>#}
+        {#<li>#}
+            {#<a href="#">Back to the list</a>#}
+        {#</li>#}
+    {#</ul>#}
+
+
+
+
+
+
+
+{% endblock main %}

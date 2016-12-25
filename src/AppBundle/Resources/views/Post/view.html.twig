@@ -1,28 +1,21 @@
 {% extends 'AppBundle:Post:list.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/single-blog.css') }}">
-{% endblock stylesheets %}
-
 {% block main %}
 
     <main class="blog">
 
         <!--  Single post  -->
 
-        <div class="post-thumbnail-bg" style="background-image: url({{ post.thumb }})">
+        <div class="post-thumbnail-bg" style="background-image: url({{ post.thumb|default('/img/img.jpg') }})">
             <div class="shadow"></div>
-            <h2>{{ post.title }}</h2>
+            <h2>{{ post.title|default('No title') }}</h2>
         </div>
         <div class="container">
             <div class="row relative">
                 <div class="blog-posts col-xs-12 col-sm-12 col-md-8">
-
-
                     <div class="post-single">
                         <div class="text">
-                           {{ post.content }}
+                           {{ post.content|default('No content') }}
                         </div>
                     </div>
                 </div>
@@ -30,13 +23,13 @@
                 <!-- Sidebar -->
                 <div class="static col-xs-12 col-sm-12 col-md-4">
                     <div class="sidebar">
-                        <a href="{{ path("edit_post", {"id": post.id}) }}">EDIT POST</a>
+                        <a href="{{ path("edit_post", {"id": post.id|default('No ID')}) }}">EDIT POST</a>
                     </div>
                 </div>
                 <!-- /Sidebar -->
             </div>
         </div>
-        <!--  /Blog posts  -->
+        <!--  /Single post  -->
 
 
     </main>

@@ -54,6 +54,12 @@ class PostType extends AbstractType
                     )
                 )
             )
+            ->add('createdAt', DateTimeType::class,
+                array(
+                    'widget' => 'choice',
+                )
+            )
+            ->add('updatedAt')
         ;
 
     }

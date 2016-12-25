@@ -1,10 +1,5 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
-{% block stylesheets %}
-   {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/blog.css') }}">
-{% endblock stylesheets %}
-
 {% block main %}
 
     <main class="blog">
@@ -14,6 +9,12 @@
             <div class="row relative">
                 <div class="blog-posts col-xs-12 col-sm-12 col-md-8">
                     <h2 class="h2">Blog</h2>
+
+                    <div class="post-single">
+                        <div class="row">
+                            <a href="{{ path('post_create') }}">Create New Post</a>
+                        </div>
+                    </div>
 
                     {% for post in posts %}
                         <div class="post-single">
@@ -26,7 +27,7 @@
                                         <a href="{{ path('single_post', {'id': post.id}) }}">{{ post.title }}</a>
                                     </h3>
                                     <div class="text">
-                                        <p>{{ post.content }}</p>
+                                        <p>{{ post.description }}</p>
                                     </div>
                                 </div>
                             </div>

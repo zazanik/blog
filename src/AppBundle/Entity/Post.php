@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Post
@@ -25,13 +27,17 @@ class Post
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=100)
+     *
+     * @Assert\NotBlank()
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="text", nullable=true)
+     * @ORM\Column(name="content", type="text")
+     *
+     * @Assert\NotBlank()
      */
     private $content;
 
@@ -39,6 +45,8 @@ class Post
      * @var string
      *
      * @ORM\Column(name="description", type="text")
+     *
+     * @Assert\NotBlank()
      */
     private $description;
 
@@ -53,6 +61,8 @@ class Post
      * @var \DateTime
      *
      * @ORM\Column(name="createdAt", type="datetime")
+     *
+     * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 
@@ -60,6 +70,8 @@ class Post
      * @var \DateTime
      *
      * @ORM\Column(name="updatedAt", type="datetime", nullable=true)
+     *
+     * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
 

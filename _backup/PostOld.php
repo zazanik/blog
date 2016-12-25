@@ -1,6 +1,5 @@
 <?php
 
-namespace AppBundle\Controller;
 
 use AppBundle\Entity\Post;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -14,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("post_z")
  */
-class PostController extends Controller
+class PostOldController extends Controller
 {
     /**
      * Lists all post entities.
@@ -54,7 +53,7 @@ class PostController extends Controller
             return $this->redirectToRoute('post_z_show', array('id' => $post->getId()));
         }
 
-        return $this->render('post/new.html.twig', array(
+        return $this->render('post/create.html.twig', array(
             'post' => $post,
             'form' => $form->createView(),
         ));
