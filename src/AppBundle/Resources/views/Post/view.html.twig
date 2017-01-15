@@ -6,7 +6,7 @@
 
         <!--  Single post  -->
 
-        <div class="post-thumbnail-bg" style="background-image: url({{ post.thumb|default('/img/img.jpg') }})">
+        <div class="post-thumbnail-bg" style="background-image: url({{ post.image|default('/img/img.jpg') }})">
             <div class="shadow"></div>
             <h2>{{ post.title|default('No title') }}</h2>
         </div>
@@ -14,6 +14,17 @@
             <div class="row relative">
                 <div class="blog-posts col-xs-12 col-sm-12 col-md-8">
                     <div class="post-single">
+
+                        <div class="author">
+                            <span>Author: </span><span><a href="{{ path('single_author', {'id': post.author.id}) }}">{{ post.author.firstName }} {{ post.author.lastName }}</a></span>
+                        </div>
+
+                        <div class="date">
+                            <span>updated: </span>
+                            <span>{{ post.updatedAt|date('l, F j, Y') }}</span>
+                        </div>
+
+
                         <div class="text">
                            {{ post.content|default('No content') }}
                         </div>
@@ -28,6 +39,7 @@
                 </div>
                 <!-- /Sidebar -->
             </div>
+
         </div>
         <!--  /Single post  -->
 

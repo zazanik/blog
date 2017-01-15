@@ -5,6 +5,8 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Post
@@ -51,11 +53,12 @@ class Post
     private $description;
 
     /**
-     * @var string
+     * @ORM\Column(type="string")
      *
-     * @ORM\Column(name="thumb", type="text", nullable=true)
+     * @Assert\NotBlank(message="Please, upload the product brochure as a PDF file.")
+     * @Assert\File(mimeTypes={ "image/jpeg", "image/png" })
      */
-    private $thumb;
+    private $image;
 
     /**
      * @var \DateTime
@@ -80,7 +83,6 @@ class Post
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $author;
-
 
     /**
      * Get id
@@ -165,27 +167,23 @@ class Post
     }
 
     /**
-     * Set thumb
-     *
-     * @param string $thumb
-     *
-     * @return Post
+     * @return mixed
      */
-    public function setThumb($thumb)
+    public function getImage()
     {
-        $this->thumb = $thumb;
-
-        return $this;
+        return $this->image;
     }
 
     /**
-     * Get thumb
-     *
-     * @return string
+     * @param $image
+     * @return $this
      */
-    public function getThumb()
+
+    public function setImage($image)
     {
-        return $this->thumb;
+        $this->image = $image;
+
+        return $this;
     }
 
     /**

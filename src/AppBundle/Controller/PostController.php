@@ -4,11 +4,21 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Author;
 use AppBundle\Entity\Post;
+use AppBundle\Form\PostType;
+
+use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+
+
+
+
+
 
 /**
  * Class PostController
@@ -32,31 +42,24 @@ class PostController extends Controller
     /**
      * Creates a new post entity.
      *
-    //     * @param Request $request
-    //     * @return array
+     * @param Request $request
      *
      * @Route("/posts/create", name="post_create")
      * @Method({"GET", "POST"})
      * @Template()
+     *
+     * @return mixed
      */
     public function createAction(Request $request)
     {
-        $post = new Post();
-        $form = $this->createForm('AppBundle\Form\PostType', $post);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($post);
-            $em->flush($post);
-
-            return $this->redirectToRoute('single_post', array('id' => $post->getId()));
+        $result = $this->get('app.form_manager')
+            ->createPostForm($request);
+        if (!$result instanceof Form) {
+            return $this->redirect($result);
         }
-
-        return array(
-            'post'      => $post,
-            'form'      => $form->createView(),
-        );
+        return [
+            'postType' => $result->createView()
+        ];
     }
 
     /**
@@ -70,6 +73,7 @@ class PostController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository("AppBundle:Post")->find($id);
+        dump($post);
         return array('post' => $post);
     }
 

@@ -11,42 +11,37 @@
 
                 <div class="col-xs-12 col-md-6 col-md-offset-3">
 
-                    {{ form_start(form) }}
-                    {{ form_errors(form) }}
+                    {{ form_start(postType) }}
+                    {{ form_errors(postType) }}
 
                     <div class="form-group">
-                        {{ form_errors(form.title) }}
-                        {{ form_widget(form.title) }}
+                        {{ form_errors(postType.title) }}
+                        {{ form_widget(postType.title) }}
                     </div>
 
                     <div class="form-group">
-                        {{ form_errors(form.description) }}
-                        {{ form_widget(form.description) }}
+                        {{ form_errors(postType.description) }}
+                        {{ form_widget(postType.description) }}
                     </div>
 
                     <div class="form-group">
-                        {{ form_errors(form.content) }}
-                        {{ form_widget(form.content) }}
+                        {{ form_errors(postType.content) }}
+                        {{ form_widget(postType.content) }}
                     </div>
 
                     <div class="form-group">
-                        {{ form_errors(form.thumb) }}
-                        {{ form_widget(form.thumb) }}
+                        {{ form_errors(postType.image) }}
+                        {{ form_widget(postType.image) }}
                     </div>
 
                     <div class="form-group">
-                        {{ form_errors(form.thumb) }}
-                        {{ form_widget(form.thumb) }}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form_label(form.author) }}
-                        {{ form_widget(form.author) }}
-                        {{ form_row(form.author) }}
+                        {{ form_label(postType.author) }}
+                        {{ form_widget(postType.author) }}
+                        {{ form_row(postType.author) }}
                     </div>
 
                     <button type="submit" class="btn btn-default">Submit</button>
-                    {{ form_end(form) }}
+                    {{ form_end(postType) }}
 
                 </div>
 

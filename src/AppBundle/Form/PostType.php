@@ -2,15 +2,21 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Tests\Fixtures\AuthorType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+
 
 class PostType extends AbstractType
 {
@@ -48,23 +54,17 @@ class PostType extends AbstractType
                     )
                 )
             )
-            ->add('thumb', TextType::class,
+            ->add('author', EntityType::class,
                 array(
-                    'label' => false,
-                    'attr'  => array(
-                        'placeholder'   => 'Image',
-                        'class'         => 'form-control'
-                    )
+                    'class' => 'AppBundle:Author',
+                    'choice_label' => 'lastName',
                 )
             )
-            ->add('author', CollectionType::class,
+            ->add('image', FileType::class,
                 array(
-                    'entry_type'   => TextType::class,
-                    'allow_add' => true,
-                    'prototype' => true,
-                    'prototype_data' => 'New Tag Placeholder',
+                    'label' => 'image (image file)'
                 )
-            );
+            )
         ;
 
     }

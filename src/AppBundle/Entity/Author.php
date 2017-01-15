@@ -50,7 +50,6 @@ class Author
 
     /**
      * @ORM\OneToMany(targetEntity="Post", mappedBy="author")
-     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      */
     private $posts;
 

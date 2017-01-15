@@ -74,6 +74,8 @@ class AuthorController extends Controller
 
         $posts = $this->getDoctrine()->getRepository(Post::class)->sortByDate();
 
+        dump($author);
+
         return array(
             'author' => $author,
             'posts' => $posts
