@@ -5,12 +5,22 @@ parameters:
 
 services:
 
-    app.brochure_uploader:
+    app.pgManager:
+        class: AppBundle\Services\PaginateManager
+        arguments: ['%app.pgManager.limit%']
+
+    app.image_uploader:
             class: AppBundle\Services\FileUploader
             arguments: ['%images_directory%']
 
     app.form_manager:
         class:        AppBundle\Services\Forms
-        arguments: ['@form.factory', '@doctrine', '@router', '@app.brochure_uploader']
+        arguments: ['@form.factory', '@doctrine', '@router', '@app.image_uploader']
 
+    app.doctrine_image_listener:
+        class: AppBundle\EventListener\ImageUploadListener
+        arguments: ['@app.image_uploader']
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }
 

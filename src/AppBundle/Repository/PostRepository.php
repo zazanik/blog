@@ -1,7 +1,7 @@
 <?php
 
 namespace AppBundle\Repository;
-
+use Doctrine\ORM\Tools\Pagination\Paginator;
 /**
  * PostRepository
  *
@@ -16,5 +16,31 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
         $query = $qb->select("p")->from("AppBundle:Post", "p")->orderBy('p.createdAt', 'DESC');
 
         return $query->getQuery()->getResult();
+    }
+
+
+    /**
+     * @param int $currentPage
+     * @return mixed
+     */
+    public function getAllPosts($currentPage = 1)
+    {
+        $query = $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->getQuery();
+        $paginator = $this->paginate($query, $currentPage);
+        return $paginator;
+    }
+
+    public function paginate($dql, $page = 1, $limit = 7)
+    {
+        if ($page === null) {
+            $page = 1;
+        }
+        $paginator = new Paginator($dql, $fetchJoinCollection = true);
+        $paginator->getQuery()
+            ->setFirstResult($limit * ($page - 1))
+            ->setMaxResults($limit);
+        return $paginator;
     }
 }

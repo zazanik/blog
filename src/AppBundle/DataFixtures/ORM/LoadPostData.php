@@ -20,7 +20,7 @@ class LoadPostData extends AbstractFixture implements OrderedFixtureInterface
             $post[$i]->setTitle($faker->text(100));
             $post[$i]->setDescription($faker->text);
             $post[$i]->setContent($faker->text(2000));
-            $post[$i]->setImage($faker->imageUrl(640, 480, null, false));
+            $post[$i]->setImage('img.jpg');
             $post[$i]->setCreatedAt($faker->dateTime);
             $post[$i]->setAuthor($this->getReference('Sasha'));
 

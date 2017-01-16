@@ -32,7 +32,7 @@ class PostType extends AbstractType
                     'attr' =>
                         array(
                             'placeholder' => 'Title',
-                            'class'       => 'form-control'
+
                         )
                 )
             )
@@ -41,7 +41,6 @@ class PostType extends AbstractType
                     'label' => false,
                     'attr'  => array(
                         'placeholder'   => 'Content',
-                        'class'         => 'form-control'
                     )
                 )
             )
@@ -50,7 +49,6 @@ class PostType extends AbstractType
                     'label' => false,
                     'attr'  => array(
                         'placeholder'   => 'Description',
-                        'class'         => 'form-control'
                     )
                 )
             )
@@ -62,7 +60,8 @@ class PostType extends AbstractType
             )
             ->add('image', FileType::class,
                 array(
-                    'label' => 'image (image file)'
+                    'label' => 'image (image file)',
+                    'data_class' => 'Symfony\Component\HttpFoundation\File\File'
                 )
             )
         ;

@@ -15,10 +15,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-
-
-
-
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class PostController
@@ -27,16 +25,19 @@ use Symfony\Component\HttpFoundation\Request;
 class PostController extends Controller
 {
     /**
-     * @return array
+     * @param Request $request
      *
      * @Route("/", name="posts_list")
      * @Template()
+     *
+     * @return array
      */
-    public function listAction()
+    public function listAction(Request $request)
     {
-        $em = $this->getDoctrine()->getRepository("AppBundle:Post");
-        $posts = $em->findAll();
-        return array('posts' => $posts);
+        $thisPage = $request->query->get('page');
+        $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->getAllPosts($thisPage);
+        $pagesParameters = $this->get('app.pgManager')->paginate($thisPage, $posts);
+        return array('posts' => $posts, 'maxPages' => $pagesParameters[0], 'thisPage' => $pagesParameters[1]);
     }
 
     /**
@@ -50,6 +51,7 @@ class PostController extends Controller
      *
      * @return mixed
      */
+
     public function createAction(Request $request)
     {
         $result = $this->get('app.form_manager')
@@ -78,28 +80,26 @@ class PostController extends Controller
     }
 
     /**
-     * 
+     *
      * @Route("/posts/edit/{id}", name="edit_post")
      * @Template()
      */
     public function editAction(Request $request, Post $post)
     {
+        dump($post);
+
+        $post->setImage(
+            new File($this->getParameter('images_directory').'/'.$post->getImage())
+        );
         $editForm = $this->createForm('AppBundle\Form\PostType', $post);
         $editForm->handleRequest($request);
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('edit_post', array('id' => $post->getId()));
         }
-
         return array(
             'post' => $post,
-            'edit_form' => $editForm->createView(),
-//            'delete_form' => $deleteForm->createView(),
+            'postType' => $editForm->createView(),
         );
-
-
     }
-
 }

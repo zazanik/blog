@@ -12,7 +12,7 @@
 
                     <div class="post-single">
                         <div class="row">
-                            <a href="{{ path('post_create') }}">Create New Post</a>
+                            <a class="btn btn-primary" href="{{ path('post_create') }}">Create New Post</a>
                         </div>
                     </div>
 
@@ -20,7 +20,7 @@
                         <div class="post-single">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6">
-                                    <a href="{{ path('single_post', {'id': post.id}) }}"><img src="{{ post.image }}"  alt=""/></a>
+                                    <a href="{{ path('single_post', {'id': post.id}) }}"><img src="{{ asset('uploads/images/' ~ post.image) }}"  alt=""/></a>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
                                     <h3>
@@ -35,7 +35,37 @@
                     {% endfor %}
 
 
-                    <div class="pagination"></div>
+                    {#<div class="pagination"></div>#}
+
+                    {% if maxPages > 1 %}
+                        <ul class="pagination pagination-sm" style="margin-left: 40%">
+                            <li {{ thisPage == 1 ? 'class="disabled"' }}>
+                                <a href="{{ path(app.request.attributes.get('_route'), { page: thisPage-1 < 1 ? 1 : thisPage-1 }) }}">«</a>
+                            </li>
+
+
+                            {% for i in 1..maxPages %}
+                                <li {{ thisPage == i ? 'class="active"' }}>
+                                    <a href="{{ path(app.request.attributes.get('_route'), { page: i }) }}">{{ i }}</a>
+                                </li>
+                            {% endfor %}
+
+
+                            <li {{ thisPage == maxPages ? 'class="disabled"' }}>
+                                <a href="{{ path(app.request.attributes.get('_route'), { page: thisPage+1 <= maxPages ? thisPage+1 : thisPage}) }}">»</a>
+                            </li>
+                        </ul>
+                    {% endif %}
+
+
+
+
+
+
+
+
+
+
                 </div>
 
                 <!-- Sidebar -->

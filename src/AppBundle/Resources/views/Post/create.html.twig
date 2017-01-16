@@ -14,6 +14,7 @@
                     {{ form_start(postType) }}
                     {{ form_errors(postType) }}
 
+
                     <div class="form-group">
                         {{ form_errors(postType.title) }}
                         {{ form_widget(postType.title) }}
@@ -40,8 +41,12 @@
                         {{ form_row(postType.author) }}
                     </div>
 
-                    <button type="submit" class="btn btn-default">Submit</button>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+
                     {{ form_end(postType) }}
+
 
                 </div>
 
