@@ -85,6 +85,14 @@ class Post
     private $author;
 
     /**
+     * @var object
+     * @Assert\Valid
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="posts")
+     * @ORM\JoinColumn(name="category", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $category;
+
+    /**
      * Get id
      *
      * @return int
@@ -241,7 +249,7 @@ class Post
      *
      * @return Post
      */
-    public function setAuthor(\AppBundle\Entity\Author $author = null)
+    public function setAuthor(Author $author = null)
     {
         $this->author = $author;
 
@@ -256,5 +264,28 @@ class Post
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Set category.
+     *
+     * @param Category $category
+     *
+     * @return category
+     */
+    public function setCategory(Category $category = null)
+    {
+        $this->category = $category;
+        return $this;
+    }
+
+    /**
+     * Get categoryId.
+     *
+     * @return object
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

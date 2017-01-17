@@ -1,0 +1,58 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block main %}
+
+    <main class="blog">
+
+        <!--  Blog posts  -->
+        <div class="container">
+            <div class="row relative">
+                <div class="blog-posts col-xs-12 col-sm-12 col-md-8">
+                    <h2 class="h2">Categories</h2>
+
+                    <div class="post-single">
+                        <div class="row">
+                            <a class="btn btn-primary" href="{{ path('category_create') }}">Create New Category</a>
+                        </div>
+                    </div>
+
+                    {% for category in categories %}
+                        <div class="post-single">
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <h3>
+                                        <a href="#">{{ category.name }}</a>
+                                    </h3>
+                                    <div class="text">
+                                        <p>{{ category.description }}</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-xs-1">
+                                    <a class="btn btn-warning" href="{{ path('category_edit', {'id': category.id}) }}">Edit</a>
+                                </div>
+                                <div class="col-xs-1">
+                                    <a class="btn btn-danger" href="{{ path('category_remove', {'id': category.id}) }}">Delete</a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Sidebar -->
+                <div class="static col-xs-12 col-sm-12 col-md-4">
+                    <div class="sidebar">
+
+                    </div>
+                </div>
+                <!-- /Sidebar -->
+            </div>
+        </div>
+        <!--  /Blog posts  -->
+
+
+
+    </main>
+
+{% endblock main %}
