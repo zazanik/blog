@@ -3,9 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Author;
+use AppBundle\Entity\Category;
 use AppBundle\Entity\Post;
 use AppBundle\Form\PostType;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -34,9 +36,11 @@ class PostController extends Controller
      */
     public function listAction(Request $request)
     {
+
         $thisPage = $request->query->get('page');
         $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->getAllPosts($thisPage);
         $pagesParameters = $this->get('app.pgManager')->paginate($thisPage, $posts);
+        dump($posts);
         return array('posts' => $posts, 'maxPages' => $pagesParameters[0], 'thisPage' => $pagesParameters[1]);
     }
 
@@ -100,6 +104,23 @@ class PostController extends Controller
         return array(
             'post' => $post,
             'postType' => $editForm->createView(),
+        );
+    }
+
+    /**
+     * Getting posts by category.
+     *
+     * @Route("/posts/category/{id}", name="category")
+     * @Template()
+     */
+    public function getPostsByCategoryAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $category = $em->getRepository('AppBundle:Category')->find($id);
+
+        return array(
+            'category' => $category
         );
     }
 }

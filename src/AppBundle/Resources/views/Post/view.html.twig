@@ -25,6 +25,13 @@
                                     <span>updated: </span>
                                     <span>{{ post.updatedAt|date('l, F j, Y') }}</span>
                                 </div>
+
+                                <div class="categories">
+                                    <span>Categories:</span>
+                                    {% for category in post.category %}
+                                        <a href="{{ path('category_edit', {'id': category.id}) }}">{{category.name}}, </a>
+                                    {% endfor %}
+                                </div>
                             </div>
 
                             <div class="left pull-right">

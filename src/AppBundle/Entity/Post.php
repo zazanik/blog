@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -84,13 +85,18 @@ class Post
      */
     private $author;
 
+
     /**
-     * @var object
-     * @Assert\Valid
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="posts")
-     * @ORM\JoinColumn(name="category", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\ManyToMany(targetEntity="Category", inversedBy="posts")
+     * @ORM\JoinTable(name="post_category")
      */
     private $category;
+
+    public function __construct()
+    {
+        $this->category = new ArrayCollection();
+    }
+
 
     /**
      * Get id

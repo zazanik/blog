@@ -39,9 +39,13 @@ class Category
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="category", cascade={"remove"})
+     * @ORM\ManyToMany(targetEntity="Post", mappedBy="category")
      */
     private $posts;
+
+    public function __construct() {
+        $this->posts = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -99,14 +103,6 @@ class Category
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->posts = new ArrayCollection();
     }
 
     /**

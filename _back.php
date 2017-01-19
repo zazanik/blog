@@ -11,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Category controller.
@@ -37,7 +36,7 @@ class CategoryController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($category);
             $em->flush($category);
-            return $this->redirectToRoute('category_list');
+            return $this->redirectToRoute('posts_list');
         }
         return array(
             'category'  => $category,
@@ -76,7 +75,6 @@ class CategoryController extends Controller
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('category_list');
         }
-        dump($editForm);
         return array(
             'category' => $category,
             'form'     => $editForm->createView(),
@@ -87,21 +85,37 @@ class CategoryController extends Controller
     /**
      * Deletes a category entity.
      *
-     * @Route("/category/delete/{id}", name="category_remove")
-     * @Method({"GET", "POST"})
-     *
+     * @Route("/category/delete/{id}", name="category_delete")
+     * @Method("DELETE")
      */
-    public function removeAction($id, Request $request) {
+    public function deleteAction(Request $request, Category $category)
+    {
+        $form = $this->createDeleteForm($category);
+        $form->handleRequest($request);
 
-        $em = $this->getDoctrine()->getManager();
-        $category = $em->getRepository('AppBundle:Category')->find($id);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($category);
+            $em->flush($category);
+        }
 
-        $em->remove($category);
-        $em->flush();
-
-        return $this->redirectToRoute('category_list');
+        return $this->redirectToRoute('category_index');
     }
 
-
+    /**
+     * Creates a form to delete a category entity.
+     *
+     * @param Category $category The category entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(Category $category)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('category_delete', array('id' => $category->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+            ;
+    }
 
 }

@@ -67,6 +67,7 @@ class PostType extends AbstractType
                 array(
                     'class' => Category::class,
                     'choice_label' => 'name',
+                    "multiple" => true
                 )
             )
             ->add('image', FileType::class,

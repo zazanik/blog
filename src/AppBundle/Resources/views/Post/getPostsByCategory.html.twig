@@ -1,0 +1,71 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block main %}
+
+    <main class="blog">
+
+        <!--  Blog posts  -->
+        <div class="container">
+            <div class="row relative">
+                <div class="blog-posts col-xs-12 col-sm-12 col-md-8">
+                    <h2 class="h2">{{ category.name }} category</h2>
+
+                    {% for post in category.posts %}
+                        <div class="post-single">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <a href="{{ path('single_post', {'id': post.id}) }}"><img src="{{ asset('uploads/images/' ~ post.image) }}"  alt=""/></a>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <h3>
+                                        <a href="{{ path('single_post', {'id': post.id}) }}">{{ post.title }}</a>
+                                    </h3>
+                                    <div class="text">
+                                        <p>{{ post.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+
+                    {#<div class="pagination"></div>#}
+
+                    {#{% if maxPages > 1 %}#}
+                        {#<ul class="pagination pagination-sm" style="margin-left: 40%">#}
+                            {#<li {{ thisPage == 1 ? 'class="disabled"' }}>#}
+                                {#<a href="{{ path(app.request.attributes.get('_route'), { page: thisPage-1 < 1 ? 1 : thisPage-1 }) }}">«</a>#}
+                            {#</li>#}
+
+
+                            {#{% for i in 1..maxPages %}#}
+                                {#<li {{ thisPage == i ? 'class="active"' }}>#}
+                                    {#<a href="{{ path(app.request.attributes.get('_route'), { page: i }) }}">{{ i }}</a>#}
+                                {#</li>#}
+                            {#{% endfor %}#}
+
+
+                            {#<li {{ thisPage == maxPages ? 'class="disabled"' }}>#}
+                                {#<a href="{{ path(app.request.attributes.get('_route'), { page: thisPage+1 <= maxPages ? thisPage+1 : thisPage}) }}">»</a>#}
+                            {#</li>#}
+                        {#</ul>#}
+                    {#{% endif %}#}
+
+                </div>
+
+                <!-- Sidebar -->
+                <div class="static col-xs-12 col-sm-12 col-md-4">
+                    <div class="sidebar">
+
+                    </div>
+                </div>
+                <!-- /Sidebar -->
+            </div>
+        </div>
+        <!--  /Blog posts  -->
+
+
+
+    </main>
+
+{% endblock main %}

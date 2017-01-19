@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Repository;
+use AppBundle\Entity\Category;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 /**
  * PostRepository
@@ -31,6 +32,18 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
         $paginator = $this->paginate($query, $currentPage);
         return $paginator;
     }
+
+//    public function getPostsByCategoryID($id)
+//    {
+//        $qb = $this->getEntityManager()->createQueryBuilder();
+//
+//        $query = $qb->select('c')
+//            ->from('AppBundle:Category', 'c')
+//            ->where('c.id ='.$id)
+//            ->getQuery();
+//
+//        return $query->getResult();
+//    }
 
     public function paginate($dql, $page = 1, $limit = 7)
     {
